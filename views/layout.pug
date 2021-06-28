@@ -1,7 +1,38 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+  frame
+    head
+
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      meta(charset='utf-8')
+
+      //- bootstrap 사용
+      meta(name='viewport', content='width=device-width, initial-scale=1')
+      link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+      script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+      script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
+
+    body
+      //- 상단 바
+      div(class="top")
+        nav(class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top")
+          div(class="container px-4")
+            a(class="navbar-brand" href="/") batch
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            div(class="collapse navbar-collapse" id="navbarResponsive")
+                ul(class="navbar-nav ms-auto")
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+      //- 메인 부분
+      div(class="mid")
+
+        block content
+      
+      //- 하단 바
+      div(class="bottom")
+        <footer class="py-5 bg-dark">
+          <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        
