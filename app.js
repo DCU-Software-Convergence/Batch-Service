@@ -6,6 +6,18 @@ var logger = require('morgan');
 
 var routes = require('./routes/control');
 
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/blog', {
+  useMongoClient: true
+});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    // we're connected!
+    console.log('connected successfully');
+});
+
 var app = express();
 
 // view engine setup
