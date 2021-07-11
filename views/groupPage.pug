@@ -6,4 +6,22 @@ block content
     br
     br
 
-    
+    div(class="container")
+        ul(class="nav nav-tabs")
+            li(class="nav-item")
+                a(class="nav-link active" data-toggle="tab" href="#my_group") 내가 속한 그룹
+            li(class="nav-item")
+                a(class="nav-link" data-toggle="tab" href="#make_group") 그룹 만들기
+            li(class="nav-item")
+                a(class="nav-link" data-toggle="tab" href="#all_group") 전체 그룹 보기
+    br
+    br
+    div(class="tab-content")
+        div(class="tab-pane container active" id="my_group")
+            include groupPageMyGroup
+        div(class="tab-pane container fade" id="make_group")
+            include groupPageMakeGroup
+        div(class="tab-pane container fade" id="all_group")
+            include groupPageAllGroup
+    br
+    br
