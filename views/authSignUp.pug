@@ -9,49 +9,35 @@ block content
             h1 회원가입
             hr
             br
-            br
-            
-            <form action="/auth/SignUp" class="was-validated" method="post" oninput='signup_pswdpswd2.setCustomValidity(signup_pswdpswd2.value != signup_pswd.value ? "Passwords do not match." : "")'>
-                - var check=[0, 0, 0, 0];
+            - var check=0;
+            <form action="/auth/SignUp" class="was-validated" method="post" oninput='signup_pswdpswd2.setCustomValidity(signup_pswdpswd2.value != signup_pswd.value ? "asd" : "" )'>
+                
                 <div class="form-group">
                     <label for="email">email:</label>
                     <input type="text" class="form-control" id="email" placeholder="Enter username" name="signup_email" required>
                     <div class="valid-feedback">Valid.</div>
-                        - check[0]=1;
                     <div class="invalid-feedback">Please fill out this field.</div>
-                        - check[0]=0;
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
                     <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="signup_pswd" required>
                     <div class="valid-feedback">Valid.</div>
-                        - check[1]=1;
                     <div class="invalid-feedback">Please fill out this field.</div>
-                        - check[1]=0;
                 </div>
                 <div class="form-group">
                     <label for="pwd">Confirm Password:</label>
                     <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="signup_pswdpswd2" required>
                     <div class="valid-feedback">Valid.</div>
-                        - check[2]=1;
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                        - check[2]=0;
-
-                        
+                    <div class="invalid-feedback">Passwords do not match.</div>
                 </div>
                 <div class="form-group">
                     <label for="uname">Username:</label>
                     <input type="text" class="form-control" id="uname" placeholder="Enter username" name="signup_uname" required>
                     <div class="valid-feedback">Valid.</div>
-                        - check[3]=1;
                     <div class="invalid-feedback">Please fill out this field.</div>
-                        - check[3]=0;
                 </div>
-                
-                - console.log(check)
-                <button type="submit" onclick ="console.log(check)" class="btn btn-primary">회원가입</button>
-                
-                
+
+                <button type="submit" class="btn btn-info">회원가입</button>
             </form>
             br
             br
