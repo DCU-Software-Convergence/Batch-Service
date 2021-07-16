@@ -11,6 +11,11 @@ router.get('/SignUp', function(req, res, next) {
     res.render('authSignUp');
 });
 
+router.get('/Logout', function(req, res, next) {
+    req.session.destroy();
+    res.redirect('/');
+});
+
 router.post('/SignUp', function(req, res) {
     var new_user = new User();
 
