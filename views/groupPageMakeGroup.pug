@@ -1,1 +1,8 @@
-a 그룹 만들기
+form(action="/group" method="post")
+    label(for=title) 그룹 이름:
+    input(class="form-control" type="text" name="groupName")
+    br
+    label(for="comment") 그룹 설명:
+    textarea(class="form-control" rows="5" name="groupContents")
+    br
+    input(type="submit" value="만들기" class="btn btn-info")
