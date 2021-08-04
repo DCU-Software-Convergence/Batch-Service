@@ -38,6 +38,10 @@ router.post('/Login', function(req, res) {
         else if (user) {
             console.log("로그인 성공");
             console.log(user);
+            console.log(user.name);
+            req.session.id = user._id;
+            req.session.name = user.name;
+            req.session.email = user.email;
             req.session.is_login = true;
             req.session.save(function() { // 세션을 세션 스토어에 저장이 끝나면 function()이 실행됩니다. save() 부분이 없다면, session store에 저장하는 일보다 redirect가 먼저 실행되어 로그인 상태가 유지가 안되는 버그(?)가 발생할 수 있습니다.
                 res.redirect('/');
