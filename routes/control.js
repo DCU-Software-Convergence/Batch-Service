@@ -7,12 +7,12 @@ const index = require('./index.js');
 const users = require('./users.js');
 const groups = require('./group.js');
 const auth = require('./auth.js');
-const mypage = require('./mypage.js');
+const userpage = require('./userpage.js');
 
 router.use('/', index);
 router.use('/users', users);
 router.use('/group', groups);
 router.use('/auth', auth);
-router.use('/mypage', mypage);
+router.use('/user', userpage);
 
 module.exports = router;
