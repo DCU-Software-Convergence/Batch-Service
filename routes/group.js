@@ -6,7 +6,7 @@ var Group = require("../models/group");
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    res.render('groupPage', { isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email });
+    res.render('groupPage', { isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID });
 });
 
 router.post('/', function(req, res) {

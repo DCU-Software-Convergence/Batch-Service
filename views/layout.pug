@@ -25,12 +25,11 @@ html
                     <li class="nav-item"><a class="nav-link" href="/group">Group</a></li>
                     if (isLogin)
                       block loginBlock
-                      - var i = userEmail.indexOf('@');
-                      - var userUrl = userEmail.slice(0, i);
-                      - var url = "/user/"+userUrl;
+
+                      - var url = "/user/"+userID;
                       li(class="nav-item")
                         a(class="nav-link" href=url)=userName
-                        
+
                       <li class="nav-item"><a class="nav-link" href="/auth/Logout">Logout</a></li>
                     else
                       block loginBlock
