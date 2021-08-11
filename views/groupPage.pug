@@ -10,11 +10,14 @@ block content
         ul(class="nav nav-tabs")
             li(class="nav-item")
                 a(class="nav-link active" data-toggle="tab" href="#my_group") 내가 속한 그룹
-            li(class="nav-item")
-                
-                a(class="nav-link" data-toggle="tab" href="#make_group") 그룹 만들기
+
             li(class="nav-item")
                 a(class="nav-link" data-toggle="tab" href="#all_group") 전체 그룹 보기
+        br
+        if (isLogin)
+            a(class="btn btn-info" type="button" style="float:right" href="/group/makegroup") 그룹 만들기
+
+
     br
     br
     div(class="tab-content")

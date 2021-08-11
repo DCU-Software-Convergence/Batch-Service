@@ -9,12 +9,18 @@ router.get('/', function(req, res, next) {
     res.render('groupPage', { isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID });
 });
 
-router.post('/', function(req, res) {
+
+router.get('/makegroup', function(req, res, next) {
+    res.render('groupPageMakeGroup',{ isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID});
+
+});
+router.post('/makegroup', function(req, res, next) {
     var group = new Group();
     
 
     group.groupName = req.body.groupName;
     group.groupExplanation = req.body.groupContents;
+    group.groupUrlName = req.body.groupURL;
     group.groupMember.push(req.session.userID)
     User.findOne({userID : req.session.userID}, (err, user) => {
         if (err) console.log(err)
@@ -31,9 +37,8 @@ router.post('/', function(req, res) {
             res.redirect('/group');
         }
         else {
-            res.render('groupPage', {isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID});
+            res.redirect('/group');
         }
-        
     });
 });
 

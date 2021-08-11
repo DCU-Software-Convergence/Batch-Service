@@ -1,8 +1,20 @@
-form(action="/group" method="post")
-    label(for=title) 그룹 이름:
-    input(class="form-control" type="text" name="groupName")
+extends layout
+
+block content
     br
-    label(for="comment") 그룹 설명:
-    textarea(class="form-control" rows="5" name="groupContents")
     br
-    input(type="submit" value="만들기" class="btn btn-info")
+    div(class="tab-content")
+        div(class="tab-pane container active" id="my_group")
+            form(action="/group/makegroup" method="post")
+                label(for=title) 그룹 이름:
+                input(class="form-control" type="text" name="groupName")
+                br
+                label(for="comment") 그룹 URL ex)group/[설정한 이름]:
+                textarea(class="form-control" rows="text" name="groupURL")
+                br
+                label(for="comment") 그룹 설명:
+                textarea(class="form-control" rows="5" name="groupContents")
+                br
+                input(type="submit" value="만들기" class="btn btn-info")
+    br
+    br
