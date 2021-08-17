@@ -5,8 +5,13 @@ var Group = require("../models/group");
 var User = require('../models/user');
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    Group.find({}, function(err, group){
+        res.render('groupPage', { group : group, isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID });
+    });
+});
 
-    res.render('groupPage', { isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID });
+router.get('/:groupid', function(req, res, next) {
+    res.send('group페이지');
 });
 
 
@@ -22,6 +27,8 @@ router.post('/makegroup', function(req, res, next) {
     group.groupExplanation = req.body.groupContents;
     group.groupUrlName = req.body.groupURL;
     group.groupMember.push(req.session.userID)
+    group.groupLeader = req.session.userID;
+
     User.findOne({userID : req.session.userID}, (err, user) => {
         if (err) console.log(err)
         else if (user) {

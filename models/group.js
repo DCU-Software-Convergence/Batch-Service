@@ -6,7 +6,8 @@ var groupSchema = new Schema({
     groupName : String,
     groupExplanation : String,
     groupUrlName : String,
-    groupMember : Array
+    groupMember : Array,
+    groupLeader : String
 });
 
 module.exports = mongoose.model('group', groupSchema);
