@@ -1,1 +1,21 @@
-a 모든 그룹
+br
+br
+div(class="table-responsive")
+    table(class="table table-bordered")
+        thead
+            tr
+                th 그룹 이름
+                th 그룹장
+                th 멤버
+        tbody
+            - var group_len = group.length;
+            - for (var i=group_len-1;i>=0;i--) {
+                - var groupURL = "group/grouplist/"+group[i].groupUrlName;
+                - var userURL = "user/" + group[i].groupLeader;
+                tr
+                    th
+                        a(class="groupText" href=groupURL) #{group[i].groupName}
+                    th 
+                        a(class="groupText" href=userURL) #{group[i].groupLeader}
+                    th #{group[i].groupMember.length}
+            -}

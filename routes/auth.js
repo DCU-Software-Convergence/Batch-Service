@@ -22,6 +22,7 @@ router.post('/SignUp', function(req, res) {
     new_user.name = req.body.signup_uname;
     new_user.email = req.body.signup_email;
     new_user.password = req.body.signup_pswd;
+
     var i = req.body.signup_email.indexOf('@');
     new_user.userID = req.body.signup_email.slice(0, i);
 
