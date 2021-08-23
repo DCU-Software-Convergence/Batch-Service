@@ -4,26 +4,58 @@ var router = express.Router();
 var Group = require("../models/group");
 var User = require('../models/user');
 /* GET home page. */
+
+/*
 router.get('/', function(req, res, next) {
     var myGroup = new Array();
-    
+    var groupObject = new Object();
     User.findOne({userID : req.session.userID}, (err, user) => {
-        var myGroupName = user.group;
-        console.log(myGroupName);
+        var myGroupName = user.group;   
+        myGroupName = myGroupName.filter(function(e){return e}); 
+        console.log(myGroupName);   // 1
         for (var gName of myGroupName) {
             Group.findOne({groupName : gName}, (err, group) => {
+                console.log(group);     // 4
+                console.log(typeof(group));     // 5
                 myGroup.push(group);
-                console.log(group);
             });
         }
-        console.log(myGroup);
     });
-
+    
 
     Group.find({}, function(err, group){
-
+        console.log('출력');        // 2
+        console.log(myGroup);      // 3
         res.render('groupPage', { group : group, isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID });
     });
+});
+*/
+router.get('/', async function(req, res, next) {
+    if (req.session.is_login) {
+        var myGroup = new Array();
+        await User.findOne({email : req.session.email}, async (err, user) => {
+
+            var myGroupName = user.group;
+            console.log(myGroupName);
+            myGroupName = myGroupName.filter(function(e){return e});
+            for (var gName of myGroupName) {
+                await Group.findOne({groupName : gName}, (err, group) => {
+                    myGroup.push(group);
+                    console.log(group);
+                });
+            }
+            
+        });
+        await Group.find({}, function(err, group){
+            res.render('groupPage', { group : group, isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID, myGroup : myGroup });
+        });
+    }
+
+    else {
+        await Group.find({}, function(err, group){
+            res.render('groupPage', { group : group, isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID });
+        });
+    }
 });
 router.get('/test', function(req, res, next) {
     res.render('canvasTest');
