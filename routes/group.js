@@ -47,18 +47,32 @@ router.get('/', async function(req, res, next) {
             
         });
         await Group.find({}, function(err, group){
-            res.render('groupPage', { group : group, isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID, myGroup : myGroup });
+            res.render('groupPage', { group : group,
+                isLogin: req.session.is_login,
+                userName : req.session.name,
+                userEmail : req.session.email,
+                userID : req.session.userID,
+                myGroup : myGroup 
+            });
         });
     }
 
     else {
         await Group.find({}, function(err, group){
-            res.render('groupPage', { group : group, isLogin: req.session.is_login, userName : req.session.name, userEmail : req.session.email, userID : req.session.userID });
+            res.render('groupPage', { group : group,
+                isLogin: req.session.is_login,
+                userName : req.session.name,
+                userEmail : req.session.email,
+                userID : req.session.userID 
+            });
         });
     }
 });
 router.get('/test', function(req, res, next) {
-    res.render('canvasTest');
+    res.render('canvasTest', {isLogin: req.session.is_login,
+        userName : req.session.name,
+        userEmail : req.session.email,
+    });
 })
 
 router.get('/grouplist/:groupid', function(req, res, next) {
@@ -69,7 +83,13 @@ router.get('/grouplist/:groupid', function(req, res, next) {
         else if (group) {
 
 
-            res.render('groupPageInfo', {isLogin: req.session.is_login,userName : req.session.name, groupName : group.groupName, groupExplanation : group.groupExplanation, groupMember : group.groupMember});
+            res.render('groupPageInfo', {isLogin: req.session.is_login,
+                userName : req.session.name,
+                userEmail : req.session.email,
+                groupName : group.groupName,
+                groupExplanation : group.groupExplanation,
+                groupMember : group.groupMember
+            });
         }
         else {
             res.send('그룹을 찾을 수 없습니다.')
@@ -89,8 +109,8 @@ router.post('/makegroup', function(req, res, next) {
     group.groupName = req.body.groupName;
     group.groupExplanation = req.body.groupContents;
     group.groupUrlName = req.body.groupURL;
-    group.groupMember.push(req.session.userID);
-    group.groupLeader.push(req.session.userID);
+    group.groupMember.push(req.session.email);
+    group.groupLeader.push(req.session.email);
     User.findOneAndUpdate({userID : req.session.userID}, { $push : {group : req.body.groupName}}, function(err, success) {
         if (err) {
             console.log(err);

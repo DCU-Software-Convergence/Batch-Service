@@ -1,18 +1,65 @@
 extends layout
 
 block content
-    <canvas id="canvas"></canvas>
+    <div class="row no-gutters">
+        div(class="col-sm-2 ")
+            .batchSideBar
+                button(type="button" class="btn btn-outline-info") 배치 추가
+        div(class="col-sm-10 ")
+            .batch
+                svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" onload="makeDraggable(evt)")
+                    
+                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
+                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
+                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
+                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
+                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
+                    rect(class="draggable" x='4' y='5' width='30' height='30' fill='red')
+                    
 
-    script.
-        function draw() {
-        var canvas = document.getElementById('canvas');
-        if (canvas.getContext) {
-            var ctx = canvas.getContext('2d');
+                    script.
+                        $(document).ready(function() {
+                            var i=1;
+                            $("button").click(function() {
+                                $("svg").append("rect(class='draggable' x='4' y='5' width='30' height='30' fill='red')");
+                                i++;
+                            });
+                        });
 
-            ctx.fillRect(25, 25, 100, 100);
-            ctx.clearRect(45, 45, 60, 60);
-            ctx.strokeRect(50, 50, 50, 50);
-        }
-        }
-    body(onload="draw();")
-        <canvas id="canvas" width="150" height="150"></canvas>
+                        function makeDraggable(evt) {
+                            var svg = evt.target;
+                            svg.addEventListener('mousedown', startDrag);
+                            svg.addEventListener('mousemove', drag);
+                            svg.addEventListener('mouseup', endDrag);
+                            svg.addEventListener('mouseleave', endDrag);
+                            var selectedElement = false;
+                            function getMousePosition(evt) {
+                                var CTM = svg.getScreenCTM();
+                                return {
+                                    x: (evt.clientX - CTM.e) / CTM.a,
+                                    y: (evt.clientY - CTM.f) / CTM.d
+                                };
+                            }
+                            function startDrag(evt) {
+                                if (evt.target.classList.contains('draggable')) {
+                                    selectedElement = evt.target;
+                                    offset = getMousePosition(evt);
+                                    offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x"));
+                                    offset.y -= parseFloat(selectedElement.getAttributeNS(null, "y"));
+                                }
+                            }
+                            function drag(evt) {
+                                if (selectedElement) {
+                                    evt.preventDefault();
+                                    var coord = getMousePosition(evt);
+
+                                    selectedElement.setAttributeNS(null, "x", coord.x - offset.x);
+                                    selectedElement.setAttributeNS(null, "y", coord.y - offset.y);
+                                }
+                            }
+                            function endDrag(evt) {
+                                selectedElement = null;
+                            }
+                        }
+                    
+
