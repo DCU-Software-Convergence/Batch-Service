@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
+    <!-- reset css -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: ivory;
+        }
+
+        #canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+        $(function () {
+            var img = new Image();
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src =
+                "http://images.christmastimeclipart.com/images/2/1271716593176_1788/img_1271716593176_17881.jpg";
+
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var canvasOffset = $("#canvas").offset();
+            var offsetX = canvasOffset.left;
+            var offsetY = canvasOffset.top;
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            /*var canvasWidth=canvas.width;
+            var canvasHeight=canvas.height;*/
+
+            var isDragging = false;
+
+            // functions to handle mouseup, mousedown, mousemove, mouseout events
+
+            $("#canvas").mousedown(function (e) {
+                handleMouseDown(e);
+            });
+            $("#canvas").mousemove(function (e) {
+                handleMouseMove(e);
+            });
+            $("#canvas").mouseup(function (e) {
+                handleMouseUp(e);
+            });
+            $("#canvas").mouseout(function (e) {
+                handleMouseOut(e);
+            });
+
+        }); // end $(function(){});
+    </script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+</html>

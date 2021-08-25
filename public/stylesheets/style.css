@@ -14,6 +14,31 @@
 /*
 bootstrap 기본 css
 */
+.static {
+  cursor: not-allowed;
+}
+.draggable {
+  cursor: move;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+svg {
+  background : rgb(240, 240, 165);
+}
+.canvasSideBar {
+  background-color: ivory;
+  height: 100%;
+  width: 100%; 
+}
+.col-sm-2 {
+  padding: 0, 0, 0, 0;
+}
+.col-sm-10 {
+  padding: 0, 0, 0, 0;
+}
 
 .mid {
   padding-top: 55px;
