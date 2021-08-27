@@ -31,28 +31,29 @@ router.get('/', function(req, res, next) {
 });
 */
 router.get('/', async function(req, res, next) {
+    console.log(req.session.is_login);
     if (req.session.is_login) {
-        var myGroup = new Array();
+        
         await User.findOne({email : req.session.email}, async (err, user) => {
-
+            var myGroup = new Array();
             var myGroupName = user.group;
-            console.log(myGroupName);
+
             myGroupName = myGroupName.filter(function(e){return e});
             for (var gName of myGroupName) {
                 await Group.findOne({groupName : gName}, (err, group) => {
                     myGroup.push(group);
-                    console.log(group);
+
                 });
             }
-            
-        });
-        await Group.find({}, function(err, group){
-            res.render('groupPage', { group : group,
-                isLogin: req.session.is_login,
-                userName : req.session.name,
-                userEmail : req.session.email,
-                userID : req.session.userID,
-                myGroup : myGroup 
+
+            await Group.find({}, function(err, group){ 
+                res.render('groupPage', { group : group,
+                    isLogin: req.session.is_login,
+                    userName : req.session.name,
+                    userEmail : req.session.email,
+                    userID : req.session.userID,
+                    myGroup : myGroup 
+                });
             });
         });
     }
