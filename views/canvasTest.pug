@@ -4,27 +4,34 @@ block content
     <div class="row no-gutters">
         div(class="col-sm-2 ")
             .batchSideBar
-                button(type="button" class="btn btn-outline-info") 배치 추가
+                button(type="button" class="btn btn-outline-info" id="btnAddBatch") 배치 추가
         div(class="col-sm-10 ")
             .batch
-                svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" onload="makeDraggable(evt)")
-                    
-                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
-                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
-                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
-                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
-                    rect(class="draggable" x="4" y="5" width="30" height="30" fill="red")
-                    rect(class="draggable" x='4' y='5' width='30' height='30' fill='red')
+                svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" onload="makeDraggable(evt)" id="svgBox")
                     
 
                     script.
-                        $(document).ready(function() {
-                            var i=1;
-                            $("button").click(function() {
-                                $("svg").append("rect(class='draggable' x='4' y='5' width='30' height='30' fill='red')");
-                                i++;
-                            });
+                        function batchObjectClickEvent() {
+                            alert(event);
+                        }
+
+                        var i=1;
+                        $("#btnAddBatch").click(function() {
+                                d3.select("#svgBox").append("rect")
+                                .attr("x", 4)
+                                .attr("y", 5)
+                                .attr("width", 30)
+                                .attr("height", 30)
+                                .attr("class", "draggable")
+                                .attr("fill", "red")
+                                .attr("id", i)
+                                .append("p")
+                                .text(i);
+                            i++;
                         });
+                        var svgBox = d3.selectAll("rect").on("click", batchObjectClickEvent(event))
+
+
 
                         function makeDraggable(evt) {
                             var svg = evt.target;
