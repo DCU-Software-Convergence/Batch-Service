@@ -28,13 +28,7 @@ block content
                 <div class="alert alert-danger">
                     <strong> 권한이 필요합니다. </strong>  <a href="/auth/Login" class="alert-link"> 로그인 </a>
                 </div>
-        div(class="tab-pane container fade" id="make_group")
-            if (isLogin)
-                include groupPageMakeGroup
-            else 
-                <div class="alert alert-danger">
-                    <strong> 권한이 필요합니다. </strong>  <a href="/auth/Login" class="alert-link"> 로그인 </a>
-                </div>
+
         div(class="tab-pane container fade" id="all_group")
             include groupPageAllGroup
     br
