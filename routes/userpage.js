@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-/* GET users listing. */
 router.get('/:userEmail', function(req, res, next) {
   User.findOne({email : req.params.userEmail}, (err, user) => {
     if (err) console.log(err);

@@ -3,7 +3,6 @@ var router = express.Router();
 
 var Group = require("../models/group");
 var User = require('../models/user');
-/* GET home page. */
 
 /*
 router.get('/', function(req, res, next) {
@@ -93,9 +92,40 @@ router.get('/grouplist/:groupid', function(req, res, next) {
             });
         }
         else {
-            res.send('그룹을 찾을 수 없습니다.')
+            res.send('그룹을 찾을 수 없습니다.');
         }
     });
+});
+router.get('/grouplist/:groupid/batch', function(req, res) {
+    if (req.session.is_login) {
+        Group.findOne({groupUrlName:req.params.groupid}, (err, group) => {
+            if (err) {
+                res.render('error');
+            }
+            else if (group) {
+                // if(groupMember.includes(userEmail))
+                if(group.groupMember.includes(req.session.email))   {
+                    res.render('batch', {isLogin: req.session.is_login,
+                        userName : req.session.name
+                    });
+                }
+                else {
+                    res.render('batchLoginFailedOrNoMember', {currentStatus : "NoGroupMember",
+                        isLogin: req.session.is_login,
+                        userName : req.session.name
+                    });
+                }
+            }
+            else {
+                res.send('그룹을 찾을 수 없습니다.');
+            }
+        });
+
+    }
+    else {
+        res.render('batchLoginFailedOrNoMember', {currentStatus : "NoLogin"});
+    }
+
 });
 
 

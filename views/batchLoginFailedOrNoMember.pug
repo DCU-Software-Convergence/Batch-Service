@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    <div class="row no-gutters">
+        - if (currentStatus == "NoLogin") {
+            <div class="alert alert-danger">
+                <strong> 권한이 필요합니다. </strong>  <a href="/auth/Login" class="alert-link"> 로그인 </a>
+            </div>
+        -}
+        - else if (currentStatus == "NoGroupMember") {
+            <div class="alert alert-danger">
+                <strong> 권한이 필요합니다. </strong> <a> 그룹 맴버가 아닙니다. </a>
+            </div>
+        -}
+
+        div(class="col-sm-2 ")
+            .batchSideBar
+        div(class="col-sm-10 ")
+            .batch
+                svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" onload="makeDraggable(evt)" id="svgBox")
